@@ -13,7 +13,11 @@ class MainActivity : AppCompatActivity() {
         val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
         typedArray.recycle()
 
-        // Attach an instance of ImageDisplayFragment using factory method
-
+        // Attach an instance of ImageDisplayFragment using the factory method
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ImageDisplayFragment.newInstance(imageArray))
+                .commit()
+        }
     }
 }
